@@ -1,10 +1,7 @@
-const names = ["Yoon", "Gun"];
-
-function Post() {
-    const chosenName = Math.random() > 0.5 ? names[0] : names[1];
+function Post(props) {
     return <div>
-        <p>ChosenName: {chosenName}</p>
-        <p>React.js is Awesome</p>
+        <p>{props.author}</p>
+        <p>{props.body}</p>
     </div>
 }
 
