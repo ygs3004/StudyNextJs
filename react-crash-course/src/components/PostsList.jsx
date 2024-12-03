@@ -1,13 +1,25 @@
 import Post from "./Post.jsx";
 import classes from "./PostsList.module.css";
 import NewPost from "./NewPost.jsx";
+import {useState} from "react";
 
 function PostsList() {
+    const [enteredBody, setEnteredBody] = useState("");
+    const [enteredAuth, setEnteredAuth] = useState("");
+
+    function bodyChangeHandler(event){
+        setEnteredBody(event.target.value);
+    }
+
+    function authChangeHandler(event){
+        setEnteredAuth(event.target.value);
+    }
+
     return (
         <>
-            <NewPost/>
+            <NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authChangeHandler}/>
             <ul className={classes.posts}>
-                <Post author="Yoon" body="React.js is Awesome"/>
+                <Post author={enteredAuth} body={enteredBody}/>
                 <Post author="Gun Soo" body="Check out the full course!"/>
             </ul>
         </>
