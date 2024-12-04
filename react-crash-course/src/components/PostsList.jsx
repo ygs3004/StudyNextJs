@@ -5,8 +5,13 @@ import {useState} from "react";
 import Modal from "./Modal.jsx";
 
 function PostsList() {
+    const [modalIsVisible, setModalIsVisible] = useState(true);
     const [enteredBody, setEnteredBody] = useState("");
     const [enteredAuth, setEnteredAuth] = useState("");
+
+    function hideModalHandler() {
+        setModalIsVisible(false);
+    }
 
     function bodyChangeHandler(event){
         setEnteredBody(event.target.value);
@@ -18,18 +23,20 @@ function PostsList() {
 
     return (
         <>
-            <Modal>
-                <NewPost
-                    onBodyChange={bodyChangeHandler}
-                    onAuthorChange={authChangeHandler}
-                />
-            </Modal>
+            {modalIsVisible && (
+                <Modal onClose={hideModalHandler}>
+                    <NewPost
+                        onBodyChange={bodyChangeHandler}
+                        onAuthorChange={authChangeHandler}
+                    />
+                </Modal>
+            )}
             <ul className={classes.posts}>
                 <Post author={enteredAuth} body={enteredBody}/>
                 <Post author="Gun Soo" body="Check out the full course!"/>
             </ul>
         </>
-    )
+    );
 };
 
 export default PostsList;
