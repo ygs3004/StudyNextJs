@@ -1,48 +1,41 @@
 import classes from './NewPost.module.css';
-import {useState} from "react";
 import Modal from "../components/Modal.jsx";
-import {Link} from "react-router-dom";
+import {Form, Link, redirect} from "react-router-dom";
 
-function NewPost({onAddPost}) {
-    const [enteredBody, setEnteredBody] = useState("");
-    const [enteredAuth, setEnteredAuth] = useState("");
-
-    function bodyChangeHandler(event){
-        setEnteredBody(event.target.value);
-    }
-
-    function authChangeHandler(event){
-        setEnteredAuth(event.target.value);
-    }
-
-    function submitHandler(event){
-        event.preventDefault();
-        const postData = {
-            body: enteredBody,
-            author: enteredAuth,
-        }
-
-        onAddPost(postData);
-    }
-
+function NewPost() {
     return (
         <Modal>
-            <form className={classes.form} onSubmit={submitHandler}>
+            <Form method='post' className={classes.form}>
                 <p>
                     <label htmlFor="body">Text</label>
-                    <textarea id="body" required rows={3} onChange={bodyChangeHandler}/>
+                    <textarea id="body" name="body" required rows={3}/>
                 </p>
                 <p>
                     <label htmlFor="name">Your name</label>
-                    <input type="text" id="name" required onChange={authChangeHandler}/>
+                    <input type="text" id="name" name="author" required/>
                 </p>
                 <p className={classes.actions}>
                     <Link to=".." type="button">Cancel</Link>
                     <button>Submit</button>
                 </p>
-            </form>
+            </Form>
         </Modal>
     );
 }
 
 export default NewPost;
+
+export async function action({request}) {
+    const formData =  await request.formData();
+    const postData = Object.fromEntries(formData); // {body: '...', author: '...'}
+
+    await fetch("http://localhost:8080/posts", {
+        method: "POST",
+        body: JSON.stringify(postData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    return redirect("/");
+}
