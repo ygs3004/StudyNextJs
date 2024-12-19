@@ -11,16 +11,16 @@ export function MainHeader() {
             <header className={classes.header}>
                 <Link className={classes.logo} href="/public">
                     <Image src={logoImg} alt="음식" priority/>
-                    꿀맛사전
+                    Foodies
                 </Link>
 
                 <nav className={classes.nav}>
                     <ul>
                         <li>
-                            <Link href="/meals">음식</Link>
+                            <Link href="/meals">Food</Link>
                         </li>
                         <li>
-                            <Link href="/community">커뮤니티</Link>
+                            <Link href="/community">Community</Link>
                         </li>
                     </ul>
                 </nav>
