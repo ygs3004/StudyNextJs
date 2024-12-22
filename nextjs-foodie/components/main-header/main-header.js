@@ -11,7 +11,7 @@ export function MainHeader() {
         <>
             <MainHeaderBackground/>
             <header className={classes.header}>
-                <Link className={classes.logo} href="/public">
+                <Link className={classes.logo} href="/">
                     <Image src={logoImg} alt="음식" priority/>
                     Foodies
                 </Link>
