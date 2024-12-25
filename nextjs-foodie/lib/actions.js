@@ -7,7 +7,7 @@ function isInvalidTest(text) {
     return (!text || text.trim() === '');
 }
 
-export async function shareMeal(formData) {
+export async function shareMeal(prevState, formData) {
     // input name 기반
     const meal = {
         title: formData.get("title"),
@@ -27,7 +27,9 @@ export async function shareMeal(formData) {
         !meal.creator_email.includes('@') ||
         !meal.image ||  meal.image.size === 0
     ) {
-        throw new Error('Invalid Input Data');
+        return {
+            message: "Invalid input"
+        }
     }
 
     await saveMeal(meal);
