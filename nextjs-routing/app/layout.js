@@ -1,5 +1,5 @@
 import './globals.css';
-import Header from "@/public/component/header";
+import MainHeader from "@/public/component/main-header";
 
 export const metadata = {
     title: 'Next.js Page Routing & Rendering',
@@ -10,8 +10,10 @@ export default function RootLayout({children}) {
     return (
         <html lang="en">
             <body>
-            <Header/>
-            {children}
+                <div id="page">
+                    <MainHeader/>
+                    {children}
+                </div>
             </body>
         </html>
     )
