@@ -3,8 +3,11 @@ import sql from "better-sqlite3";
 
 const db = sql("data.db");
 
-export function getAllNews() {
+export async function getAllNews() {
     const news = db.prepare("SELECT * FROM news").all();
+
+    // 지연이 있는 경우 시뮬레이션
+    await new Promise ( resolve => {setTimeout(resolve, 2000)})
     return news;
 }
 
