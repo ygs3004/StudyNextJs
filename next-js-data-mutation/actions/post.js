@@ -1,7 +1,7 @@
 "use server";
 // use server가 서버에서 만 코드가 포함 되는 것을 보장 하지 않음
 
-import {storePost} from "@/lib/posts";
+import {storePost, updatePostLikeStatus} from "@/lib/posts";
 import {redirect} from "next/navigation";
 import {uploadImage} from "@/lib/cloudinary";
 
@@ -47,4 +47,8 @@ export async function createPost(prevState, formData) {
     });
 
     redirect("/feed");
+}
+
+export async function togglePostLikeStatus(postId) {
+    updatePostLikeStatus(postId, 2);
 }
