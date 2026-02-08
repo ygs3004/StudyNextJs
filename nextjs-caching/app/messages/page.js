@@ -9,13 +9,15 @@ export default async function MessagesPage() {
     // 호출시 캐시 방지
     // unstable_noStore()
 
-    const response = await fetch('http://localhost:8080/messages'
-        // , {
-        // cache: "force-cache", default 값, 강제 캐시
-        // cache: "no-store", 요청을 캐시로 저장 안함
-        // next: {
-        //     revalidate: 5 // 초 단위로 캐시 유지 설정
-        // }}
+    const response = await fetch('http://localhost:8080/messages', {
+            // , {
+            // cache: "force-cache", default 값, 강제 캐시
+            // cache: "no-store", 요청을 캐시로 저장 안함
+            next: {
+                //     revalidate: 5 // 초 단위로 캐시 유지 설정
+                tags: ["msg"], // 태그를 이용한 캐시 관리
+            },
+        }
     );
     const messages = await response.json();
 
