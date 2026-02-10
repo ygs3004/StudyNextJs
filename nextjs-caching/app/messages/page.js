@@ -2,8 +2,6 @@ import Messages from '@/components/messages';
 import {unstable_noStore} from "next/cache";
 import {getMessages} from "@/lib/messages";
 
-
-
 export default async function MessagesPage() {
     // 호출시 캐시 방지
     // unstable_noStore()
@@ -15,7 +13,7 @@ export default async function MessagesPage() {
     // );
     // const messages = await response.json();
 
-    const messages = getMessages();
+    const messages = await getMessages();
 
     if (!messages || messages.length === 0) {
         return <p>No messages found</p>;
