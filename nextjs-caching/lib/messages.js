@@ -24,7 +24,10 @@ export const getMessages = nextCache(
     cache(function getMessages() {
         console.log('Fetching messages from db');
         return db.prepare('SELECT * FROM messages').all();
-    }), ["messages"]
+    }), ["messages"], {
+        // revalidate: 5,
+        tags: ["msg"],
+    }
 )
 
 
