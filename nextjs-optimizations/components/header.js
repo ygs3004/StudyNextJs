@@ -7,8 +7,9 @@ export default function Header() {
         <header id="main-header">
             <Link href="/">
                 <Image src={logo}
-                    // width={100}
-                    // height={100}
+                       width={100}
+                       height={100}
+                       priority // <> lazy, 반드시 로딩 될 경우
                     // sizes="10vw"
                        alt="Mobile phone with posts feed on it"
                 />
