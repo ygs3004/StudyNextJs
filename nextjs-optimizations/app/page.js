@@ -3,6 +3,13 @@ import { Suspense } from 'react';
 import Posts from '@/components/posts';
 import { getPosts } from '@/lib/posts';
 
+// metadata 상수 명으로 nextJs 설정
+export const metadata = {
+    title: "Latest Post, 창에 표시",
+    description: "Latest Post Description Here, 검색시 표시",
+    // openGraph: {}
+}
+
 async function LatestPosts() {
   const latestPosts = await getPosts(2);
   return <Posts posts={latestPosts} />;
