@@ -2,6 +2,7 @@
 
 import {createUser} from "@/lib/user";
 import {hashUserPassword} from "@/lib/hash";
+import {redirect} from "next/navigation";
 
 export async function signup(prevState, formData) {
     const email = formData.get("email");
@@ -25,5 +26,18 @@ export async function signup(prevState, formData) {
 
     // create a new user
     const hashedPassword = hashUserPassword(password);
-    createUser(email, hashedPassword);
+    try {
+        createUser(email, hashedPassword);
+    } catch (error){
+        if (error.code === "SQLITE_CONSTRAINT_UNIQUE") {
+            return {
+                errors: {
+                    email: "이미 존재하는 이메일입니다.",
+                }
+            }
+        }
+        throw error;
+    }
+
+    redirect("/training");
 }
