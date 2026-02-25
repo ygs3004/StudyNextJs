@@ -1,0 +1,18 @@
+import {Lucia} from "lucia";
+import {BetterSqlite3Adapter} from "@lucia-auth/adapter-sqlite";
+import db from "@/lib/db";
+
+const adapter = new BetterSqlite3Adapter(db, {
+    user: "users", // table name
+    session: "sessions", // table name
+});
+
+const lucia = new Lucia(adapter, {
+    sessionCookie: {
+        expires: false, // nextJs 에서 사용시 false 로 설정, 공식 문서 참조
+        attributes: {
+            secure: process.env.NODE_ENV === "production" // Https 설정
+        }
+    }
+});
+
