@@ -1,3 +1,6 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+
 function HomePage(props) {
     const {products} = props;
 
@@ -12,16 +15,13 @@ function HomePage(props) {
 
 // 서버 사이드 static generation, 클라이언트로 전달되지 않는 코드
 export async function getStaticProps() {
+    const filePath = path.join(process.cwd(), "data", "dummy-backend.json");
+    const jsonData = await fs.readFile(filePath);
+    const data = JSON.parse(jsonData);
+
     return {
         props: {
-            products: [
-                {
-                    id: "p1", title: "Product 1",
-                },
-                {
-                    id: "p2", title: "Product 2",
-                }
-            ]
+            products: data.products,
         }
     }
 }
