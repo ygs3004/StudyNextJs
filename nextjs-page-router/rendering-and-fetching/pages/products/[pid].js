@@ -22,7 +22,7 @@ export async function getStaticProps(context) {
     const {params} = context;
     const productId = params.pid;
 
-    const data = getData();
+    const data = await getData();
 
     const product = data.products.find(product => product.id === productId);
 
