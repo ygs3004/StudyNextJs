@@ -1,9 +1,8 @@
 export async function getAllEvents() {
     const url = process.env.FIREBASE_URL + "/events.json";
     const response = await fetch(url);
-    console.log(url);
-    console.log(response);
     const data = await response.json();
+    console.log(data)
 
     const events = [];
 
